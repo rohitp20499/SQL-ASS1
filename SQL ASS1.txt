@@ -1,0 +1,92 @@
+#1. Create a Product db table with Primary key, as product name and manufacturer, consider below fields
+product id, name, manufacturer, description, stock numbers
+
+create table product (
+
+  pid int,
+  pname varchar(30),
+  pmanufacture varchar(30),
+  pdesc varchar(40),
+  stock_numbers int,
+  constraint p_pk primary key(name,manufacture));
+
+
+insert into product values(
+  1,'pname1','pmanu1','pdesc1',9);
+
+insert into product values(
+  2,'pname2','pmanu2','pdesc2',2);
+
+insert into product values(
+  3,'pname3','pmanu3','pdesc3',3);
+
+insert into product values(
+  4,'pname4','pmanu4','pdesc4',4);
+
+
+
+
+
+
+#2. Can I use alter to add/remove primary key from already existing table?If so, how?
+
+ALTER TABLE PRODUCT
+DROP CONSTRAINT P_PK;
+
+
+
+ALTER TABLE PRODUCT
+ADD COSTRAINT P_PK
+PRIMARY KEY(NAME,MANUFACTURE);
+
+
+
+#3. Give an example for self referential key, employee with one of the column as manager, and manager himself is another Employee
+
+
+CREATE TABLE employee ( employee_id int PRIMARY KEY, employee_name varchar(30), salary varchar(30), manager_id int,
+ CONSTRAINT sr_fk_emp_man FOREIGN KEY (manager_id) REFERENCES employee(employee_id) );
+
+
+
+
+
+
+#4. In existing Product and Seller table scenario, create another table Transactions(with columns id, product id, date time, seller id), create foreign key 
+constraint between Transactions table and Seller table with on delete set null clause.
+
+
+
+CREATE TABLE TRANSACTIONS(
+TID NUMBER,
+PID NUMBER,
+DATE TIME DATETIME,
+SID NUMBER,
+CONSTRAINT FK_TRANSACTIONS FOREIGN KEY(SID)
+REFERENCES SELLER(SID) ON DELETE SET NULL
+);
+
+
+#5. 
+
+seller(sid, sname,scontact ),product(pid, sid, pname, pmake, pmodel)
+
+join, please try left and right outer joins separately
+
+
+LEFT JOIN:
+
+
+SELECT sellers.sname, product.pname
+FROM seller
+LEFT JOIN product
+ON sellers.sid=product.pid;
+
+RIGHT JOIN:
+
+SELECT sellers.sname, product.pname
+FROM seller
+RIGHT JOIN product
+ON sellers.sid=product.pid;
+
+
